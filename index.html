@@ -43,6 +43,23 @@
     }
   </script>
 </head>
+<!-- Load Lottie (Bodymovin) from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<!-- Your animation script -->
+<script>
+ // Load from your static 3.json file
+ fetch('./3.json')
+   .then(response => response.json())
+   .then(animationData => {
+     lottie.loadAnimation({
+       container: document.getElementById('lottie'),
+       renderer: 'svg',
+       loop: true,
+       autoplay: true,
+       animationData: animationData
+     });
+   });
+</script>
 <body class="bg-gray-50 min-h-screen">
   <div class="max-w-4xl mx-auto p-4">
     <!-- Header -->
@@ -50,7 +67,7 @@
       <h1 class="text-3xl font-bold text-center text-indigo-600">Lottie2GIF Converter</h1>
       <p class="text-gray-600 text-center mt-2">Convert Lottie animations to GIF format in seconds</p>
     </header>
-    
+    <div id="lottie" style="width: 400px; height: 400px; margin: auto;"></div>
     <!-- Main content -->
     <main class="grid md:grid-cols-2 gap-6">
       <!-- Upload section -->
