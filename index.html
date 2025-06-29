@@ -3,103 +3,48 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lottie Converter</title>
+<title>Lottie Converter Test</title>
 <style>
-
-    body {
-
-      background-color: #121212;
-
-      color: white;
-
-      font-family: sans-serif;
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      justify-content: center;
-
-      height: 100vh;
-
-      margin: 0;
-
-    }
-
-    #lottie {
-
-      width: 300px;
-
-      height: 300px;
-
-      background: white;
-
-      border-radius: 8px;
-
-    }
+     body {
+       background-color: #121212;
+       color: white;
+       font-family: sans-serif;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       height: 100vh;
+       margin: 0;
+     }
+     #lottie {
+       width: 300px;
+       height: 300px;
+       background: white;
+       border-radius: 10px;
+     }
 </style>
 </head>
 <body>
-<h1>GIF Converter</h1>
+<h2>Lottie Converter Test</h2>
 <div id="lottie"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<!-- Lottie player script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
 <script>
-
-    // Listen for Lottie data sent via postMessage
-
-    window.addEventListener('message', (event) => {
-
-      if (!event.data) return;
-
-      try {
-
-        const animationData = typeof event.data === 'string'
-
-          ? JSON.parse(event.data)
-
-          : event.data;
-
-        lottie.loadAnimation({
-
-          container: document.getElementById('lottie'),
-
-          renderer: 'svg',
-
-          loop: true,
-
-          autoplay: true,
-
-          animationData: animationData
-
-        });
-
-      } catch (err) {
-
-        console.error("Invalid Lottie JSON received", err);
-
-      }
-
-    });
-</script>
-<script>
- window.addEventListener("message", function (event) {
-   try {
-     const animationData = event.data;
-     // Load into the Lottie player
-     const animationContainer = document.getElementById("lottie");
-     lottie.loadAnimation({
-       container: animationContainer,
-       renderer: "svg",
-       loop: true,
-       autoplay: true,
-       animationData: animationData,
+     window.addEventListener("message", function (event) {
+       // Optional: Check origin if needed
+       const data = event.data;
+       if (data && typeof data === "object" && data.v === "5.7.4") {
+         lottie.loadAnimation({
+           container: document.getElementById("lottie"),
+           renderer: "svg",
+           loop: true,
+           autoplay: true,
+           animationData: data
+         });
+       } else {
+         console.warn("Message received but not valid Lottie data.");
+       }
      });
-   } catch (e) {
-     console.error("Invalid Lottie data:", e);
-   }
- }, false);
-</script></body>
+</script>
+</body>
 </html>
- 
