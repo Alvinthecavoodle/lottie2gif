@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Lottie Converter Test</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
 <style>
      body {
        background-color: #121212;
@@ -20,30 +21,36 @@
        width: 300px;
        height: 300px;
        background: white;
-       border-radius: 10px;
+       border-radius: 12px;
+     }
+     h1 {
+       margin-bottom: 20px;
      }
 </style>
 </head>
 <body>
-<h2>Lottie Converter Test</h2>
+<h1>Lottie Converter Test</h1>
 <div id="lottie"></div>
-<!-- Lottie player script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
 <script>
-window.addEventListener("message", function (event) {
- const data = event.data;
- if (data && typeof data === "object" && data.v) {
-   lottie.loadAnimation({
-     container: document.getElementById("lottie"),
-     renderer: "svg",
-     loop: true,
-     autoplay: true,
-     animationData: data
-   });
- } else {
-   console.warn("Message received but not valid Lottie data.");
- }
-});
+     window.addEventListener("message", function (event) {
+       const data = event.data;
+       if (data && typeof data === "object" && data.v) {
+         try {
+           lottie.loadAnimation({
+             container: document.getElementById("lottie"),
+             renderer: "svg",
+             loop: true,
+             autoplay: true,
+             animationData: data
+           });
+           console.log("✅ Lottie animation loaded via postMessage");
+         } catch (error) {
+           console.error("❌ Error loading Lottie animation:", error);
+         }
+       } else {
+         console.warn("⚠️ Invalid Lottie data received via postMessage");
+       }
+     });
 </script>
 </body>
 </html>
