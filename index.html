@@ -83,6 +83,23 @@
 
     });
 </script>
-</body>
+<script>
+ window.addEventListener("message", function (event) {
+   try {
+     const animationData = event.data;
+     // Load into the Lottie player
+     const animationContainer = document.getElementById("lottie");
+     lottie.loadAnimation({
+       container: animationContainer,
+       renderer: "svg",
+       loop: true,
+       autoplay: true,
+       animationData: animationData,
+     });
+   } catch (e) {
+     console.error("Invalid Lottie data:", e);
+   }
+ }, false);
+</script></body>
 </html>
  
