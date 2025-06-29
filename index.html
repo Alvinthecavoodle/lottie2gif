@@ -30,21 +30,20 @@
 <!-- Lottie player script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
 <script>
-     window.addEventListener("message", function (event) {
-       // Optional: Check origin if needed
-       const data = event.data;
-       if (data && typeof data === "object" && data.v === "5.7.4") {
-         lottie.loadAnimation({
-           container: document.getElementById("lottie"),
-           renderer: "svg",
-           loop: true,
-           autoplay: true,
-           animationData: data
-         });
-       } else {
-         console.warn("Message received but not valid Lottie data.");
-       }
-     });
+window.addEventListener("message", function (event) {
+ const data = event.data;
+ if (data && typeof data === "object" && data.v) {
+   lottie.loadAnimation({
+     container: document.getElementById("lottie"),
+     renderer: "svg",
+     loop: true,
+     autoplay: true,
+     animationData: data
+   });
+ } else {
+   console.warn("Message received but not valid Lottie data.");
+ }
+});
 </script>
 </body>
 </html>
