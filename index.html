@@ -42,18 +42,24 @@
 </style>
 </head>
 <body>
-<h1>Lottie Converter Test</h1>
+<h1>GIF Converter</h1>
 <div id="lottie"></div>
-<!-- Load Lottie (Bodymovin) from CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-<!-- Load local animation -->
 <script>
 
-    fetch('./demo/3.json')
+    // Listen for Lottie data sent via postMessage
 
-      .then(response => response.json())
+    window.addEventListener('message', (event) => {
 
-      .then(animationData => {
+      if (!event.data) return;
+
+      try {
+
+        const animationData = typeof event.data === 'string'
+
+          ? JSON.parse(event.data)
+
+          : event.data;
 
         lottie.loadAnimation({
 
@@ -69,13 +75,13 @@
 
         });
 
-      })
+      } catch (err) {
 
-      .catch(err => {
+        console.error("Invalid Lottie JSON received", err);
 
-        console.error("Failed to load animation:", err);
+      }
 
-      });
+    });
 </script>
 </body>
 </html>
