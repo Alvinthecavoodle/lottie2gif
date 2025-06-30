@@ -48,7 +48,27 @@
     }
 </style>
 </head>
-<body>
+<script>
+ window.addEventListener('message', (event) => {
+   try {
+     const data = JSON.parse(event.data);
+     if (data.v && data.layers) {
+       // Valid Lottie animation
+       lottie.loadAnimation({
+         container: document.getElementById('lottie'),
+         renderer: 'svg',
+         loop: true,
+         autoplay: true,
+         animationData: data,
+       });
+     } else {
+       console.warn('Invalid Lottie data:', data);
+     }
+   } catch (e) {
+     console.error('Failed to parse message as JSON:', e);
+   }
+ }, false);
+</script> <body>
 <h1>Lottie Converter Test</h1>
 <div id="lottie"></div>
 <script>
