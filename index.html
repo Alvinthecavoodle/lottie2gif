@@ -6,131 +6,51 @@
 <title>Lottie Converter Test</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
 <style>
-
-    body {
-
-      background-color: #121212;
-
-      color: white;
-
-      font-family: sans-serif;
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      justify-content: center;
-
-      height: 100vh;
-
-      margin: 0;
-
-    }
-
-    #lottie {
-
-      width: 300px;
-
-      height: 300px;
-
-      background: white;
-
-      border-radius: 12px;
-
-    }
-
-    h1 {
-
-      margin-bottom: 20px;
-
-    }
+   body {
+     background-color: #121212;
+     color: white;
+     font-family: sans-serif;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     height: 100vh;
+     margin: 0;
+   }
+   #lottie {
+     width: 300px;
+     height: 300px;
+     background: white;
+     border-radius: 12px;
+   }
+   h1 {
+     margin-bottom: 20px;
+   }
 </style>
 </head>
-<script>
- window.addEventListener('message', (event) => {
-   try {
-     const data = JSON.parse(event.data);
-     if (data.v && data.layers) {
-       // Valid Lottie animation
-       lottie.loadAnimation({
-         container: document.getElementById('lottie'),
-         renderer: 'svg',
-         loop: true,
-         autoplay: true,
-         animationData: data,
-       });
-     } else {
-       console.warn('Invalid Lottie data:', data);
-     }
-   } catch (e) {
-     console.error('Failed to parse message as JSON:', e);
-   }
- }, false);
-</script> <body>
+<body>
 <h1>Lottie Converter Test</h1>
 <div id="lottie"></div>
 <script>
-
-    window.addEventListener("message", function (event) {
-
-      const data = event.data;
-
-      if (data && typeof data === "object" && data.v) {
-
-        try {
-
-          lottie.loadAnimation({
-
-            container: document.getElementById("lottie"),
-
-            renderer: "svg",
-
-            loop: true,
-
-            autoplay: true,
-
-            animationData: data
-
-          });
-
-          console.log("✅ Lottie animation loaded via postMessage");
-
-        } catch (error) {
-
-          console.error("❌ Error loading Lottie animation:", error);
-
-        }
-
-      } else {
-
-        console.warn("⚠️ Invalid Lottie data received via postMessage");
-
-      }
-
-    });
-</script>
-<script>
- window.addEventListener('message', (event) => {
-   try {
-     const data = JSON.parse(event.data);
-     if (data.v && data.layers) {
-       // Valid Lottie animation
-       lottie.loadAnimation({
-         container: document.getElementById('lottie'),
-         renderer: 'svg',
-         loop: true,
-         autoplay: true,
-         animationData: data,
-       });
-     } else {
-       console.warn('Invalid Lottie data:', data);
+   window.addEventListener('message', (event) => {
+     try {
+       const data = JSON.parse(event.data);
+       if (data.v && data.layers) {
+         // Valid Lottie JSON — render animation
+         lottie.loadAnimation({
+           container: document.getElementById('lottie'),
+           renderer: 'svg',
+           loop: true,
+           autoplay: true,
+           animationData: data,
+         });
+       } else {
+         console.warn('Received data is not valid Lottie JSON:', data);
+       }
+     } catch (e) {
+       console.error('Error parsing message as JSON:', e);
      }
-   } catch (e) {
-     console.error('Failed to parse message as JSON:', e);
-   }
- }, false);
-</script></body>
+   }, false);
+</script>
+</body>
 </html>
- 
